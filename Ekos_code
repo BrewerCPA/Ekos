@@ -1,0 +1,19 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+username = "username"
+password = "password"
+
+url4 = r'https://na5.goekos.com/02.32.00/_processors/report.ashx?action=loadgenerate&reportguid=f3b72cf7-43f4-e911-aa0c-0a687e2aa3e0&\
+objectguid=f9a7fd84-1772-e711-bc79-d4ae5266e0c4&reportname=Cost%20Of%20Goods%20Sold%20-%20With%20Customer'## Doesn't work--get 500 response
+
+
+url3 = r'https://na5.goekos.com/02.32.00/default.aspx?objectid=942&action=search&\
+showTabs=true&appid=02DB64B2-9387-E311-AB85-D4AE5266E0C4&navid=200' ##first page of COGS report--gets response 200
+
+response = requests.get(url3, auth=(username, password)).text
+soup = BeautifulSoup(response, 'html5lib')
+
+print(soup)
+# df = pd.read_html(response, flavor='html5lib')--no table found
